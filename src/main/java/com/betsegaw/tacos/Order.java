@@ -22,7 +22,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="Taco_Order")
+@Table(name="Taco_Order", schema="taco_cloud")
 public class Order {
 	
 	@Id

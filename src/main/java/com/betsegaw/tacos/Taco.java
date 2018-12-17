@@ -21,6 +21,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name="taco",schema="taco_cloud")
 public class Taco {
 	
 	@Id

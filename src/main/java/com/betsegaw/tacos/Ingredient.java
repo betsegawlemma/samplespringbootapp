@@ -23,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
 @RequiredArgsConstructor
+@Table(name="ingredient",schema="taco_cloud")
 public class Ingredient
 {
 	@Id

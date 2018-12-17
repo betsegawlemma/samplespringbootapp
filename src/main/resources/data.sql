@@ -1,4 +1,4 @@
-INSERT INTO Ingredient (name, type) VALUES ('Flour Tortilla', 'WRAP'), 
+INSERT INTO ingredient (name, type) VALUES ('Flour Tortilla', 'WRAP'), 
 										   ('Corn Tortilla', 'WRAP'),
 										   ('Ground Beef', 'PROTEIN'),
 										   ('Carnitas', 'PROTEIN'),
