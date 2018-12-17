@@ -35,8 +35,7 @@ public class DesginTacoController {
 	private TacoRepository tacoRepository;
 	
 	@Autowired
-	public DesginTacoController(IngredientRepository ingredientRepository, 
-			TacoRepository tacoRepository) {
+	public DesginTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
 		this.ingredientRepository = ingredientRepository;
 		this.tacoRepository = tacoRepository;
 		
@@ -71,9 +70,7 @@ public class DesginTacoController {
 	}
 	
 	@PostMapping
-	public String processDesign(
-	   @Valid Taco tacoDesign, 
-	   Errors errors, Order order) {
+	public String processDesign(@Valid Taco tacoDesign, Errors errors, Order order) {
 		
 		if(errors.hasErrors()) {
 			return "design";
