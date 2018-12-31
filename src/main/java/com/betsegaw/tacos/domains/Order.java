@@ -1,22 +1,26 @@
-package com.betsegaw.tacos;
+package com.betsegaw.tacos.domains;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
+
+import com.betsegaw.tacos.security.User;
 
 import lombok.Data;
 
@@ -36,8 +40,13 @@ public class Order {
 		this.placedAt = new Date();
 	}	
 	
-	@NotBlank(message="Delivery Name is required")
-	private String deliveryName;
+	@Column(name = "first_name")
+    @NotBlank(message = "Please provide your first name")
+    private String firstName;
+    
+    @Column(name = "last_name")
+    @NotBlank(message = "Please provide your last name")
+    private String lastName;
   
 	@NotBlank(message="Delivery Street is required")
   	private String deliveryStreet;
@@ -66,6 +75,9 @@ public class Order {
 	public void addTacoDesign(Taco tacoDesign) {
 		this.tacos.add(tacoDesign);
 	}
+	
+	@ManyToOne
+	private  User user;
 
 }
 

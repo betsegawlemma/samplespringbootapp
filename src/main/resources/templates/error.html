@@ -2,22 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Taco Cloud</title>
+<title>Something went wrong</title>
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
 	<nav class="navbar navbar-light bg-light">
-		<a class="navbar-brand" href="#">
-			<h1>Welcome to Taco Cloud!</h1>
-		</a>
-		<form th:action="@{/login}" method="GET">
-			<button class="btn btn-md btn-warning btn-block" type="Submit">Go
-				To Login Page</button>
-		</form>
+		
+			<h3 class="text-danger">Our apologies: something went wrong</h3>
+		
 	</nav>
 	<div class="container">
 		<img th:src="@{/images/tacocloud.png}" />
+		<hr />
+		<a th:href="@{/}" id="another">Please go back to our Home Page</a><br />
 		<hr />
 		&copy; 2018 Taco Cloud
 	</div>

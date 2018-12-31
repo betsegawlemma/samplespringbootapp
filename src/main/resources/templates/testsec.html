@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <title>Taco Cloud</title>
 <!-- Bootstrap core CSS -->
@@ -9,15 +10,18 @@
 <body>
 	<nav class="navbar navbar-light bg-light">
 		<a class="navbar-brand" href="#">
-			<h1>Welcome to Taco Cloud!</h1>
+			<h1>Welcome to Secure Taco Cloud!</h1>
 		</a>
-		<form th:action="@{/login}" method="GET">
-			<button class="btn btn-md btn-warning btn-block" type="Submit">Go
-				To Login Page</button>
-		</form>
 	</nav>
 	<div class="container">
 		<img th:src="@{/images/tacocloud.png}" />
+		<hr />
+		<div sec:authorize="hasRole('TACOADMIN')">
+			<h2> This content is only shown to TACOADMIN users</h2>
+		</div>
+		<div sec:authorize="hasRole('TACOUSER')">
+			<h2> This content is only shown to TACOUSER users</h2>
+		</div>
 		<hr />
 		&copy; 2018 Taco Cloud
 	</div>

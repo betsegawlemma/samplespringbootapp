@@ -8,3 +8,4 @@ INSERT INTO ingredient (name, type) VALUES ('Flour Tortilla', 'WRAP'),
 										   ('Monterrey Jack', 'CHEESE'),
 										   ('Salsa', 'SAUCE'),
 										   ('Sour Cream', 'SAUCE');
+INSERT INTO `role` (role) VALUES ('TACOUSER');

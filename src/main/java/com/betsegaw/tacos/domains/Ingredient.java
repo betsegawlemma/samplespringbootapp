@@ -1,4 +1,4 @@
-package com.betsegaw.tacos;
+package com.betsegaw.tacos.domains;
 
 import java.util.HashSet;
 import java.util.Set;

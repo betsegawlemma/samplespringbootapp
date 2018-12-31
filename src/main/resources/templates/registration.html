@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<title>Taco Cloud</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+
+<body>
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand" href="#">
+			<h1>Signup for Taco Cloud! <span th:utext="${successMessage}"></span></h1>
+		</a>
+		<form th:action="@{/login}" method="GET">
+			<button class="btn btn-md btn-warning btn-block" type="Submit">Go
+				To Login Page</button>
+		</form>
+	</nav>
+	<div class="container">
+		<form th:action="@{/registration}" th:object="${user}" method="post"
+			class="form-horizontal" role="form">
+			<br />
+
+			<div class="form-group">
+				<label for="firstName">First Name: </label> <input type="text"
+					th:field="*{firstName}" class="form-control" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('firstName')}"
+					th:errors="*{firstName}">First Name Error </span>
+			</div>
+
+			<div class="form-group">
+				<label for="lastName">Last Name: </label> <input type="text"
+					th:field="*{lastName}" class="form-control" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('lastName')}"
+					th:errors="*{lastName}">Last Name Error</span>
+			</div>
+			<div class="form-group">
+				<label for="userName">User Name: </label> <input type="text"
+					th:field="*{username}" class="form-control" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('username')}"
+					th:errors="*{username}">Username Error</span>
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label> <input type="password"
+					th:field="*{password}" class="form-control" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('password')}"
+					th:errors="*{password}">Password Error</span>
+
+			</div>
+			<div class="form-group">
+				<label for="deliveryStreet">Street address: </label> <input
+					type="text" th:field="*{deliveryStreet}" class="form-control" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('deliveryStreet')}"
+					th:errors="*{deliveryStreet}">Street Error</span>
+			</div>
+
+			<div class="form-group">
+				<label for="deliveryCity">City: </label> <input type="text"
+					th:field="*{deliveryCity}" class="form-control" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('deliveryCity')}"
+					th:errors="*{deliveryCity}">City Error</span>
+			</div>
+
+			<div class="form-group">
+				<label for="deliveryState">State: </label> <input type="text"
+					th:field="*{deliveryState}" class="form-control" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('deliveryState')}"
+					th:errors="*{deliveryState}">State Error</span>
+			</div>
+
+			<div class="form-group">
+				<label for="deliveryZip">Zip code: </label> <input type="text"
+					th:field="*{deliveryZip}" class="form-control" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('deliveryZip')}"
+					th:errors="*{deliveryZip}">Zip Error</span>
+			</div>
+
+			<div class="form-group">
+				<label for="phoneNumber">Phone Number: </label> <input type="tel"
+					pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:field="*{phoneNumber}"
+					class="form-control" /> <span class="text-danger"
+					th:if="${#fields.hasErrors('phoneNumber')}"
+					th:errors="*{phoneNumber}">Phone Number Error</span>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-block">Sign
+					Up</button>
+			</div>
+
+			
+
+		</form>
+		<hr />
+		&copy; 2018 Taco Cloud
+	</div>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script th:href="@{/js/jquery-3.3.1.slim.min.js}"
+		src="../js/jquery-3.3.1.slim.min.js"></script>
+	<script th:href="@{/js/popper.min.js}" src="../js/popper.min.js"></script>
+	<script th:href="@{/js/bootstrap.min.js}" src="../js/bootstrap.min.js"></script>
+	<script th:href="@{/js/holder.min.js}" src="../js/holder.min.js"></script>
+</body>
+</html>
