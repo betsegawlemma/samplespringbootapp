@@ -1,6 +1,5 @@
 package com.betsegaw.tacos.controllers;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,8 +52,6 @@ public class DesginTacoController {
 		return new Order();
 	}
 	
-	
-
 	@ModelAttribute(name="tacoDesign")
 	public Taco tacoDesign() {
 		return new Taco();
@@ -63,7 +60,7 @@ public class DesginTacoController {
 	@ModelAttribute(name="user")
 	public UserDetails user(@AuthenticationPrincipal UserDetails userDetails) {
 		String username = userDetails.getUsername();
-		User user = (User) userService.loadUserByUsername(username);
+		User user = userService.findUserByUsername(username);
 		return user;
 	}
 	
