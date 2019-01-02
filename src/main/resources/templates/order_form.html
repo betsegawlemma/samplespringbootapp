@@ -14,12 +14,12 @@
 		<a class="navbar-brand" href="#">
 			<h1>Order your taco creations!</h1>
 		</a>
-		<form th:action="@{/logout}" method="POST">
+		<form th:action="@{/logout}" th:method="POST">
 			<button class="btn btn-md btn-warning btn-block" type="Submit">Logout</button>
 		</form>
 	</nav>
 	<div class="container">
-		<form method="POST" th:action="@{/orders}" th:object="${order}">
+		<form th:method="POST" th:action="@{/orders}" th:object="${order}">
 
 			<img th:src="@{/images/tacocloud.png}" />
 

@@ -12,13 +12,13 @@
   <a class="navbar-brand" href="#">
     <h1>Login to Taco Cloud!</h1>
   </a>
-  <form  class="form-inline my-2 my-lg-0" th:action="@{/registration}" method="GET">
+  <form  class="form-inline my-2 my-lg-0" th:action="@{/registration}" th:method="GET">
 		<button class="btn btn-md btn-warning btn-block" type="submit">Go To Registration Page</button>
 	</form>	
 </nav>
 <div class="container">
 	
-			<form th:action="@{/login}" method="POST" class="form-signin">
+			<form th:action="@{/login}" th:method="POST" class="form-signin">
 			<br/>
 			 <div class="form-group">
 			 <label for="username">User Name</label>

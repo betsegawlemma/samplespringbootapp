@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -23,10 +23,10 @@ import com.betsegaw.tacos.domains.Ingredient;
 import com.betsegaw.tacos.domains.Order;
 import com.betsegaw.tacos.domains.Taco;
 import com.betsegaw.tacos.domains.Ingredient.Type;
-import com.betsegaw.tacos.repositories.IngredientRepository;
-import com.betsegaw.tacos.repositories.TacoRepository;
 import com.betsegaw.tacos.security.User;
-import com.betsegaw.tacos.services.UserDetailsServiceImpl;
+import com.betsegaw.tacos.services.IngredientService;
+import com.betsegaw.tacos.services.TacoService;
+import com.betsegaw.tacos.services.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,15 +36,16 @@ import lombok.extern.slf4j.Slf4j;
 @SessionAttributes("order")
 public class DesginTacoController {
 	
-	private IngredientRepository ingredientRepository;
-	private TacoRepository tacoRepository;
-	private UserDetailsServiceImpl userDetailsServiceImpl;
+	private IngredientService ingredientService;
+	private TacoService tacoService;
+	private UserService userService;
 	
 	@Autowired
-	public DesginTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository, UserDetailsServiceImpl userDetailsServiceImpl) {
-		this.ingredientRepository = ingredientRepository;
-		this.tacoRepository = tacoRepository;
-		this.userDetailsServiceImpl = userDetailsServiceImpl;
+	public DesginTacoController(IngredientService ingredientService, TacoService tacoService,
+			UserService userService) {
+		this.ingredientService = ingredientService;
+		this.tacoService = tacoService;
+		this.userService = userService;
 	}
 	
 	@ModelAttribute(name="order")
@@ -52,22 +53,24 @@ public class DesginTacoController {
 		return new Order();
 	}
 	
+	
+
 	@ModelAttribute(name="tacoDesign")
 	public Taco tacoDesign() {
 		return new Taco();
 	}
 	
 	@ModelAttribute(name="user")
-	public UserDetails user(Principal principal) {
-		String username = principal.getName();
-		User user = (User) userDetailsServiceImpl.loadUserByUsername(username);
+	public UserDetails user(@AuthenticationPrincipal UserDetails userDetails) {
+		String username = userDetails.getUsername();
+		User user = (User) userService.loadUserByUsername(username);
 		return user;
 	}
 	
 	@ModelAttribute
 	public void addIngredientsToModel(Model model) {
 		List<Ingredient> ingredients = new ArrayList<>();
-		ingredientRepository.findAll()
+		ingredientService.findAll()
 							.forEach(i->ingredients.add(i));
 		
 		Type[] types = Ingredient.Type.values();
@@ -89,7 +92,7 @@ public class DesginTacoController {
 			return "design";
 		}
 		
-		Taco savedTaco = tacoRepository.save(tacoDesign);
+		Taco savedTaco = tacoService.save(tacoDesign);
 		order.addTacoDesign(savedTaco);
 		log.info("Taco object after persisting: " + savedTaco);
 		

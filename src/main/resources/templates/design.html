@@ -12,13 +12,13 @@
 		<a class="navbar-brand" href="#">
 			<h1>Design your taco Mr./Ms. <span th:text="${user.firstName}">First Name</span></h1>
 		</a>
-		<form th:action="@{/logout}" method="POST">
+		<form th:action="@{/logout}" th:method="POST">
 			<button class="btn btn-md btn-warning btn-block" type="Submit">Logout</button>
 		</form>
 	</nav>
 	<div class="container">
 		<img th:src="@{/images/tacocloud.png}" />
-		<form method="POST" th:object="${tacoDesign}">
+		<form th:method="POST" th:action="@{/design}" th:object="${tacoDesign}">
 			<span class="text-danger" th:if="${#fields.hasErrors('ingredients')}"
 				th:errors="*{ingredients}">Ingredient Error</span>
 			<div class="row">

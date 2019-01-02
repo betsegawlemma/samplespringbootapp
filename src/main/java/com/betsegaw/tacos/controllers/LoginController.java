@@ -3,7 +3,6 @@ package com.betsegaw.tacos.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,13 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.betsegaw.tacos.security.User;
-import com.betsegaw.tacos.services.UserDetailsServiceImpl;
+import com.betsegaw.tacos.services.UserService;
 
 @Controller
 public class LoginController {
 	
 	@Autowired
-    private UserDetailsServiceImpl userDetailsServiceImpl;
+    private UserService userService;
 	
 	@ModelAttribute(name="user")
 	public User user() {
@@ -38,7 +37,7 @@ public class LoginController {
 
     @PostMapping("/registration")
     public String createNewUser(@Valid User user, BindingResult bindingResult, Model model) {
-        User userExists = userDetailsServiceImpl.findUserByUsername(user.getUsername());
+        User userExists = userService.findUserByUsername(user.getUsername());
         if (userExists != null) {
             bindingResult
                     .rejectValue("user", "error.user",
@@ -48,7 +47,7 @@ public class LoginController {
             return "registration";
         } else {
         	
-            userDetailsServiceImpl.saveUser(user);
+            userService.saveUser(user);
             
             model.addAttribute("successMessage", "User has been registered successfully");
             

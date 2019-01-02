@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.betsegaw.tacos.domains.Order;
-import com.betsegaw.tacos.repositories.OrderRepository;
 import com.betsegaw.tacos.security.User;
-import com.betsegaw.tacos.services.UserDetailsServiceImpl;
+import com.betsegaw.tacos.services.OrderService;
+import com.betsegaw.tacos.services.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,19 +27,20 @@ import lombok.extern.slf4j.Slf4j;
 @SessionAttributes("order")
 public class OrderController {
 
-	private OrderRepository orderRepository;
-	private UserDetailsServiceImpl userDetailsServiceImpl;
+	private OrderService orderService;
+	private UserService userService;
 
 	@Autowired
-	public OrderController(OrderRepository orderRepository, UserDetailsServiceImpl userDetailsServiceImpl) {
-		this.orderRepository = orderRepository;
-		this.userDetailsServiceImpl = userDetailsServiceImpl;
+	public OrderController(OrderService orderService, UserService userService) {
+		this.orderService = orderService;
+		this.userService = userService;
 	}
 
 	@GetMapping("/current")
 	public String orderForm(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute Order order) {
 
-		User user = userDetailsServiceImpl.findUserByUsername(userDetails.getUsername());
+		User user = userService.findUserByUsername(userDetails.getUsername());
+		
 		log.info("Order submited by: " + user.getUsername());
 
 		
@@ -80,7 +81,7 @@ public class OrderController {
 		
 		order.setUser(user);
 		
-		Order savedOrder = orderRepository.save(order);
+		Order savedOrder = orderService.save(order);
 		log.info("Order submitted: " + savedOrder);
 		sessionStatus.setComplete();
 		return "redirect:/";
