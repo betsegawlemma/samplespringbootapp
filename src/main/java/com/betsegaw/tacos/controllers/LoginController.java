@@ -40,7 +40,7 @@ public class LoginController {
         User userExists = userService.findUserByUsername(user.getUsername());
         if (userExists != null) {
             bindingResult
-                    .rejectValue("user", "error.user",
+                    .rejectValue("username", "error.username",
                             "There is already a user registered with the username provided");
         }
         if (bindingResult.hasErrors()) {
