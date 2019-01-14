@@ -34,7 +34,6 @@ public class Taco {
 	private String name;
 	
 	@ManyToMany
-	@Size(min=1, message="You must choose at least 1 ingredient")
 	private Set<Ingredient> ingredients = new HashSet<>();
 
 }

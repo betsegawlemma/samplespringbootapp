@@ -2,6 +2,10 @@ package com.betsegaw.tacos.services;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 import com.betsegaw.tacos.domains.Taco;
 
 public interface TacoService {
@@ -17,6 +21,8 @@ public interface TacoService {
 	Iterable<Taco> findAll();
 
 	Iterable<Taco> findAllById(Iterable<Long> ids);
+	Iterable<Taco> findAll(Sort sort);
+	Page<Taco> findAll(Pageable pageable);
 
 	long count();
 	

@@ -19,9 +19,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
-import com.betsegaw.tacos.security.User;
-
 import lombok.Data;
+
 
 @Data
 @Entity
@@ -74,9 +73,6 @@ public class Order {
 	public void addTacoDesign(Taco tacoDesign) {
 		this.tacos.add(tacoDesign);
 	}
-	
-	@ManyToOne
-	private  User user;
 
 }
 

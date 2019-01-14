@@ -3,6 +3,9 @@ package com.betsegaw.tacos.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.betsegaw.tacos.domains.Taco;
@@ -71,6 +74,16 @@ public class TacoServiceImpl implements TacoService {
 	@Override
 	public void deleteAll() {
 		tacoRepository.deleteAll();
+	}
+
+	@Override
+	public Iterable<Taco> findAll(Sort sort) {
+		return tacoRepository.findAll(sort);
+	}
+
+	@Override
+	public Page<Taco> findAll(Pageable pageable) {
+		return tacoRepository.findAll(pageable);
 	}
 
 }
