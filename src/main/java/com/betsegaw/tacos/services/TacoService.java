@@ -21,7 +21,9 @@ public interface TacoService {
 	Iterable<Taco> findAll();
 
 	Iterable<Taco> findAllById(Iterable<Long> ids);
+	
 	Iterable<Taco> findAll(Sort sort);
+	
 	Page<Taco> findAll(Pageable pageable);
 
 	long count();
